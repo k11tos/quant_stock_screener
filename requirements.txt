@@ -1,1 +1,4 @@
 yfinance==0.2.52
+pre-commit==4.1.0
+setuptools==75.8.0
+# quant_stock_screener==0.0.0

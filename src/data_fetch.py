@@ -1,8 +1,9 @@
-import yfinance as yf
-import pandas as pd
 import logging
-import urllib.request
 import os
+import urllib.request
+
+import pandas as pd
+import yfinance as yf
 
 logger = logging.getLogger(__name__)
 
@@ -17,6 +18,7 @@ nyse_url = "ftp://ftp.nasdaqtrader.com/SymbolDirectory/otherlisted.txt"
 nasdaq_file = os.path.join(data_folder, "nasdaq_listed.csv")
 nyse_file = os.path.join(data_folder, "nyse_listed.csv")
 all_tickers_file = os.path.join(data_folder, "all_us_stocks.csv")
+
 
 def download_ftp_file(ftp_url, save_path):
     """FTP에서 파일을 다운로드하여 저장"""
@@ -84,6 +86,7 @@ def get_stock_data(ticker):
         "Revenue Growth YoY": info.get("revenueGrowth", None),
         "Net Income Growth YoY": info.get("netIncomeToCommon", None),
     }
+
 
 def fetch_all_data(ticker_list):
     """티커 리스트에 대해 데이터를 수집하는 함수"""
