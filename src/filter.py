@@ -1,4 +1,7 @@
 import pandas as pd
+import logging
+
+logger = logging.getLogger(__name__)
 
 def filter_stocks(df):
     """소형 성장 가치주 필터링"""

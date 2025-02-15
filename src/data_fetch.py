@@ -1,5 +1,8 @@
 import yfinance as yf
 import pandas as pd
+import logging
+
+logger = logging.getLogger(__name__)
 
 def get_stock_data(ticker):
     """주어진 티커의 재무 데이터를 가져오는 함수"""
