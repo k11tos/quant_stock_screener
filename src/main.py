@@ -1,25 +1,26 @@
 import logging
+import os
 
-from data_fetch import fetch_all_data
+from data_fetch import fetch_all_tickers
 from filter import filter_stocks
 from logging_setup import setup_logging
-from src.data_fetch import fetch_all_tickers
 
 logger = logging.getLogger(__name__)
 setup_logging()
 
-# 미국 주식 전체 리스트 가져오기
+# 데이터 폴더 및 파일 경로 설정
+data_folder = "data"
+os.makedirs(data_folder, exist_ok=True)
+
+# 파일 경로 설정
+all_stocks_file = os.path.join(data_folder, "all_us_stocks.csv")
+filtered_stocks_file = os.path.join(data_folder, "filtered_stocks.csv")
+
+# ✅ 미국 주식 리스트 가져오기
 all_tickers = fetch_all_tickers()
 logger.info(f"가져온 종목 수: {len(all_tickers)}")
 
-sp500_tickers = ["AAPL", "MSFT", "TSLA", "AMZN", "GOOG"]  # 임시 샘플
+# ✅ 필터링 실행
+filter_stocks(all_stocks_file, filtered_stocks_file)
 
-# 데이터 수집
-stock_df = fetch_all_data(sp500_tickers)
-
-# 필터링
-filtered_df = filter_stocks(stock_df)
-
-# CSV 파일로 저장
-filtered_df.to_csv("data/filtered_stocks.csv", index=False)
-logger.info("Filtered stock list saved to data/filtered_stocks.csv")
+print(f"🎉 최종 필터링 완료! 필터링된 종목 파일: {filtered_stocks_file}")
